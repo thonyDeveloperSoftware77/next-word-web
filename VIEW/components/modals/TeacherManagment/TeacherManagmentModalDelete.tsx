@@ -79,7 +79,7 @@ export default function TeacherManagmentModalDelete(props: any) {
                 <ModalContent>
                     {(onClose) => (
                         <>
-                            <ModalHeader className="flex flex-col gap-1">Modal Title</ModalHeader>
+                            <ModalHeader className="flex flex-col gap-1">Delete Teacher</ModalHeader>
                             <ModalBody>
                                 <p>
                                     Estás seguro de eliminar la cuenta de {teacher.name}?

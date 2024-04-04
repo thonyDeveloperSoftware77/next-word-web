@@ -26,13 +26,9 @@ export default function TeacherManagment() {
 
     //Nombre de los atributos de la tabla de Emails
     const INITIAL_VISIBLE_COLUMNS = ["name", "email", "state", "actions"];
-
-
-
-
     return (
         <div>
-            {data == undefined ? <p></p> : <TableCustom setUpdate={setUpdate} columns={columns} INITIAL_VISIBLE_COLUMNS={INITIAL_VISIBLE_COLUMNS} users={data} option={"TeacherManagment"} />}
+            {data == undefined ? <p></p> : <TableCustom setUpdate={setUpdate} columns={columns} INITIAL_VISIBLE_COLUMNS={INITIAL_VISIBLE_COLUMNS} users={data} option={"TeacherManagment"}  />}
         </div>
     );
 }

@@ -77,7 +77,7 @@ export default function TeacherManagmentModalEdit(props: any) {
                 <ModalContent>
                     {(onClose) => (
                         <>
-                            <ModalHeader className="flex flex-col gap-1">Modal Title</ModalHeader>
+                            <ModalHeader className="flex flex-col gap-1">Edit Teacher</ModalHeader>
                             <ModalBody>
                                 <Input
                                     label="Name"

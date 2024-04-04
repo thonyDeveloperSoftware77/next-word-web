@@ -51,30 +51,41 @@ function AdminPage() {
 
 
   return (
-    <div>
-      <h1>Inicio de Sesión para administradores</h1>
-      <Input
-        label="Email"
-        variant="bordered"
-        placeholder="Enter your email"
-        type="email"
-        className="max-w-xs"
-        name="email"
-        value={admin.email}
-        onChange={handleChange}
-      />
-      <Input
-        label="Password"
-        variant="bordered"
-        placeholder="Enter your password"
-        className="max-w-xs"
-        name="password"
-        value={admin.password}
-        onChange={handleChange}
-      />
-      <Button color="primary" onPress={handleAuth}>
-        Action
-      </Button>
+    <div className="flex flex-col items-center justify-center h-screen space-y-4">
+
+      <h1>
+        <b>
+          Login</b></h1>
+      <div className="space-y_2">
+        <Input
+
+          label="Email"
+          variant="bordered"
+          placeholder="Enter your email"
+          type="email"
+          className="max-w-xs"
+          name="email"
+          value={admin.email}
+          onChange={handleChange}
+        />
+      </div>
+      <div className="space-y_2">
+        <Input
+          label="Password"
+          variant="bordered"
+          placeholder="Enter your password"
+          className="max-w-xs"
+          name="password"
+          value={admin.password}
+          onChange={handleChange}
+        />
+      </div>
+      <div className="space-y_4">
+        <Button color="primary" onPress={handleAuth}>
+          Ingresar
+        </Button>
+      </div>
+
     </div>
 
   );

@@ -25,28 +25,16 @@ function AdminPage() {
     }
   }
 
+  
 
   async function handleAuth() {
-    if (await verifyAdminAccount(admin.email, admin.password)) {
-      toast.success("Inicio de sesión exitoso");
-      router.push('/admin/dashboard');
+    const verify = await verifyAdminAccount(admin.email, admin.password)
+    if (verify) {
+      toast.success("Inicio de sesión exitoso")
+      router.push('/admin/dashboard')
     }
   }
 
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(authValidation, (user) => {
-      if (user) {
-        // El usuario está autenticado y es un usuario administrador
-        if (user.uid === process.env.NEXT_PUBLIC_ADMIN_UID) {
-          router.push('/admin/dashboard');
-        }
-      }
-    });
-
-    // Limpia la suscripción cuando el componente se desmonta
-    return () => unsubscribe();
-  }, []);
 
 
 

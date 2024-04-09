@@ -1,7 +1,7 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, getIdToken } from "firebase/auth";
 import { authValidation } from "../BD/firebase";
 import { toast } from "react-toastify";
-
+import { getCookie, setCookie } from "cookies-next";
 export default async function verifyAdminAccount(email: string, password: string): Promise<boolean> {
     var success: boolean = false;
     if (!email || !password) {
@@ -16,10 +16,19 @@ export default async function verifyAdminAccount(email: string, password: string
         return false;
     }
     try {
-        await signInWithEmailAndPassword(authValidation, email, password);
+        const userCredential = await signInWithEmailAndPassword(authValidation, email, password)
         // Signed in
         console.log("Authentication successful");
-        success = true;
+        const idToken = await getIdToken(userCredential.user);
+        setCookie("auth-token", idToken);
+        // Verifica que la cookie se haya guardado correctamente
+        const savedToken = getCookie("auth-token");
+        if (savedToken === idToken) {
+            console.log("Token saved successfully");
+            success = true;
+        } else {
+            console.error("Error saving token");
+        }
     } catch (error) {
         // An error occurred during authentication
         console.error("Authentication error:", error);

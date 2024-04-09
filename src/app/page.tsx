@@ -1,10 +1,11 @@
 'use client'
 import { Card, CardBody, CardFooter, CardHeader, Divider, Link, Image, Button, ButtonGroup, Input } from "@nextui-org/react";
-import { getAuth, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { getAuth, getIdToken, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { authValidation, provider } from "../../BD/firebase";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { setCookie } from "cookies-next";
 
 export default function Home() {
   const router = useRouter();
@@ -25,10 +26,13 @@ export default function Home() {
 
   async function handleAuth() {
     try {
-      await signInWithEmailAndPassword(authValidation, teacher.email, teacher.password);
+      const userCredential = await signInWithEmailAndPassword(authValidation, teacher.email, teacher.password);
       // Signed in
       console.log("Authentication successful");
+      const idToken = await getIdToken(userCredential.user);
+      setCookie("auth-token", idToken);
       toast.success("Inicio de sesión exitoso");
+
       router.push('/teacher');
     } catch (error) {
       // An error occurred during authentication

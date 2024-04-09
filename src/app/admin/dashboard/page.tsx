@@ -1,6 +1,4 @@
 'use client'
-import withAuth from '../../../../HOCS/withAuth';
-import AdminLayout from './layout';
 function DashboardAdmin() {
     return (
         <div>
@@ -9,4 +7,4 @@ function DashboardAdmin() {
     );
 }
 
-export default withAuth(DashboardAdmin);
+export default DashboardAdmin

@@ -1,9 +1,14 @@
 import Teacher from "../MODEL/Teacher";
 
+import { getCookie } from "cookies-next";
 
-export async function getTeachers(): Promise<Teacher[]> {
+export async function getTeachers(token: string): Promise<Teacher[]> {
     try {
-        const response = await fetch("http://localhost:3001/teacher");
+        const response = await fetch("http://localhost:3001/teacher",{
+            headers: {
+              'Authorization': `Bearer ${token}`, // Aquí es donde incluyes el token de Firebase
+            },
+        })
         const result = await response.json();
         //transformar el resultado a un array de objetos con map y retornar el resultado
         return result.map((teacher: Teacher) => {
@@ -21,8 +26,14 @@ export async function getTeachers(): Promise<Teacher[]> {
 }
 
 export async function getTeacher(uid: string): Promise<Teacher | undefined> {
+    const tokenCookie = await getCookie('auth-token')
+    const token = String(tokenCookie)
     try {
-        const response = await fetch(`http://localhost:3001/teacher/${uid}`);
+        const response = await fetch(`http://localhost:3001/teacher/${uid}`,{
+            headers: {
+              'Authorization': `Bearer ${token}`, // Aquí es donde incluyes el token de Firebase
+            },
+        })
         const result = await response.json();
         return result;
     } catch (error) {
@@ -32,10 +43,13 @@ export async function getTeacher(uid: string): Promise<Teacher | undefined> {
     return undefined;
 }
 
-export async function createTeacher(teacher: Teacher) {
+export async function createTeacher(token:string,  teacher: Teacher) {
+    console.log('token', token)
+    console.log('teacher', teacher) 
     const myHeaders = new Headers();
     teacher.state = true;
     myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Authorization", `Bearer ${token}`); // Añade el token aquí
 
     const raw = JSON.stringify(teacher);
 
@@ -55,10 +69,10 @@ export async function createTeacher(teacher: Teacher) {
     }
 }
 
-
-export async function updateTeacher(uid: string, name: string, state: boolean) {
+export async function updateTeacher(token:string,  uid: string, name: string, state: boolean) {
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
+    myHeaders.append("Authorization", `Bearer ${token}`); // Añade el token aquí
 
     const raw = JSON.stringify({ name, state });
 
@@ -80,10 +94,14 @@ export async function updateTeacher(uid: string, name: string, state: boolean) {
     return undefined;
 }
 
-export async function deleteTeacher(uid: string) {
+export async function deleteTeacher(token:string,  uid: string) {
     const requestOptions: RequestInit = {
         method: "DELETE",
-        redirect: "follow" as RequestRedirect
+        redirect: "follow" as RequestRedirect,
+        headers: {
+            'Authorization': `Bearer ${token}`,
+        }
+            
     };
 
     try {

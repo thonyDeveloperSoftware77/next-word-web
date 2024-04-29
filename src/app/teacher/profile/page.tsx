@@ -10,4 +10,4 @@ import withAuthStore from "../../../../HOCS/withAuthStore";
     );
 }
 
-export default withAuthStore(Page);
+export default Page

@@ -5,3 +5,4 @@ export default interface Teacher {
     password: string;
     state: boolean;
 }
+

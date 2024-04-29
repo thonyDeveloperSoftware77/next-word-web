@@ -7,8 +7,11 @@ import { createTeacher } from "../../../../CONTROLLER/teacher.controller";
 import { toast } from "react-toastify";
 import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 import { authCreate, authValidation } from "../../../../BD/firebase";
+import { useAuth } from "../../../providers/AuthContextProviderAdmin";
 
 export default function TeacherManagmentCModalreate(props: any) {
+
+    const { token } = useAuth();
 
     const [teacher, setTeacher] = useState<Teacher>({
         uid: "",
@@ -44,24 +47,15 @@ export default function TeacherManagmentCModalreate(props: any) {
 
     const handleCrear = async () => {
         try {
-            onAuthStateChanged(authValidation, async (user) => {
-                //Saca el token del usuario
-                if (user) {
-                    // El usuario está autenticado, obtenemos el token
-                    const token = await user.getIdToken();
-                    console.log(token);
-                    await createTeacher(token, teacher).then((res) => {
-                        if (res.email === teacher.email) {
-                            props.setUpdate((prevState: boolean) => !prevState);
-                            toast.success("Teacher created successfully");
-                            props.cerrar(true);
-                        } else {
-                            notifyError(res.message.message);
-                        }
-                    });
+            await createTeacher(token, teacher).then((res) => {
+                if (res.email === teacher.email) {
+                    props.setUpdate((prevState: boolean) => !prevState);
+                    toast.success("Teacher created successfully");
+                    props.cerrar(true);
+                } else {
+                    notifyError(res.message.message);
                 }
-            }
-            );
+            });
 
         } catch (error) {
             toast.error("No se pudo crear el usuario");

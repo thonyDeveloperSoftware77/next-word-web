@@ -45,7 +45,6 @@ export async function getTeacher(uid: string): Promise<Teacher | undefined> {
 
 export async function createTeacher(token:string,  teacher: Teacher) {
     console.log('token', token)
-    console.log('teacher', teacher) 
     const myHeaders = new Headers();
     teacher.state = true;
     myHeaders.append("Content-Type", "application/json");

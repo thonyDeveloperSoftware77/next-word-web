@@ -7,8 +7,11 @@ import { createTeacher, updateTeacher } from "../../../../CONTROLLER/teacher.con
 import { toast } from "react-toastify";
 import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 import { authCreate, authValidation } from "../../../../BD/firebase";
+import { useAuth } from "../../../providers/AuthContextProviderAdmin";
 
 export default function TeacherManagmentModalEdit(props: any) {
+
+    const { token } = useAuth();
     const [teacher, setTeacher] = useState<Teacher>({
         uid: props.data.uid,
         name: props.data.name,
@@ -43,22 +46,15 @@ export default function TeacherManagmentModalEdit(props: any) {
 
     const handleUpdate = async () => {
         try {
-            onAuthStateChanged(authValidation, async (user) => {
-                //Saca el token del usuario
-                if (user) {
-                    // El usuario está autenticado, obtenemos el token
-                    const token = await user.getIdToken();
-                    await updateTeacher(token, teacher.uid, teacher.name, teacher.state).then((res) => {
-                        if (res && res.email === teacher.email) {
-                            props.setUpdate((prevState: boolean) => !prevState);
-                            toast.success("Teacher updated successfully");
-                            props.cerrar(true);
-                        } else {
-                            notifyError(res?.message?.message);
-                        }
-                    });
+            await updateTeacher(token, teacher.uid, teacher.name, teacher.state).then((res) => {
+                if (res && res.email === teacher.email) {
+                    props.setUpdate((prevState: boolean) => !prevState);
+                    toast.success("Teacher updated successfully");
+                    props.cerrar(true);
+                } else {
+                    notifyError(res?.message?.message);
                 }
-            })
+            });
         } catch (error) {
             toast.error("No se pudo crear el usuario");
         }

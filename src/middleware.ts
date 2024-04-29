@@ -1,7 +1,5 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
-import { getCookie } from "cookies-next";
-import jwt from 'jsonwebtoken';
 import { verifyTokenAdmin } from '../CONTROLLER/verify.controller';
 
 // Función de autenticación genérica
@@ -9,7 +7,7 @@ async function authenticate(request: NextRequest, noAuthURL: string, authorizedU
     const tokenCookie = await request.cookies.get('auth-token')
     const token = String(tokenCookie?.value)
     const tokenVerify = await verifyTokenAdmin(token)
-    verifyTokenAdmin(token).then (res => {
+    verifyTokenAdmin(token).then(res => {
         console.log('res', res)
     })
 

@@ -4,12 +4,14 @@ import { Button, Input } from "@nextui-org/react";
 import { getAuth, onAuthStateChanged, setPersistence } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { authValidation } from "../../../BD/firebase";
-import verifyAdminAccount from "../../../Utils/verifyAdminAccount";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import { useAuth } from "../../../VIEW/providers/AuthContextProviderAdmin";
+
 
 function AdminPage() {
   const router = useRouter();
+  const { verifyAdminAccount } = useAuth();
   const [admin, setAdmin] = useState({
     email: '',
     password: ''

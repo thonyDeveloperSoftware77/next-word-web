@@ -9,4 +9,4 @@ function Page() {
     );
 }
 
-export default withAuthStore(Page);
+export default Page

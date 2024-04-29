@@ -5,10 +5,11 @@ import { authValidation, provider } from "../../BD/firebase";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { setCookie } from "cookies-next";
+import { useAuth } from "../../VIEW/providers/AuthContextProviderAdmin";
 
 export default function Home() {
   const router = useRouter();
+  const { logIn } = useAuth();
   const [teacher, setTeacher] = useState({
     email: '',
     password: ''
@@ -26,12 +27,16 @@ export default function Home() {
 
   async function handleAuth() {
     try {
-      const userCredential = await signInWithEmailAndPassword(authValidation, teacher.email, teacher.password);
       // Signed in
-      console.log("Authentication successful");
-      const idToken = await getIdToken(userCredential.user);
-      setCookie("auth-token", idToken);
-      toast.success("Inicio de sesión exitoso");
+      try {
+        await logIn(teacher.email, teacher.password);
+        console.log("Authentication successful");
+        toast.success("Inicio de sesión exitoso");
+        router.push('/dashboard');
+      } catch (error: any) {
+        console.log(error.message);
+      }
+
 
       router.push('/teacher');
     } catch (error) {

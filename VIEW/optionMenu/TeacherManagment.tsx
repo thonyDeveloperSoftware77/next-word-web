@@ -6,21 +6,16 @@ import { getTeachers } from '../../CONTROLLER/teacher.controller';
 import Teacher from '../../MODEL/Teacher';
 import { onAuthStateChanged } from 'firebase/auth';
 import { authValidation } from '../../BD/firebase';
+import { useAuth } from '../providers/AuthContextProviderAdmin';
 export default function TeacherManagment() {
     const [data, setData] = useState<Teacher[]>([]);
+    const { token } = useAuth();
     const [update, setUpdate] = useState(false); // Estado para forzar la actualización
 
     useEffect(() => {
-        onAuthStateChanged(authValidation, async (user) => {
-            //Saca el token del usuario
-            if (user) {
-                // El usuario está autenticado, obtenemos el token
-                const token = await user.getIdToken();
-                getTeachers(token).then((res) => {
-                    setData(res);
-                });
-            }
-
+        //Saca el token del usuario
+        getTeachers(token).then((res) => {
+            setData(res);
         });
     }, [update]);
 

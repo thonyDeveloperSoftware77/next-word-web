@@ -7,8 +7,11 @@ import { createTeacher, deleteTeacher, updateTeacher } from "../../../../CONTROL
 import { toast } from "react-toastify";
 import { createUserWithEmailAndPassword, deleteUser, getAuth, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 import { authCreate, authValidation } from "../../../../BD/firebase";
+import { useAuth } from "../../../providers/AuthContextProviderAdmin";
 
 export default function TeacherManagmentModalDelete(props: any) {
+
+    const { token } = useAuth();
     const [teacher, setTeacher] = useState<Teacher>({
         uid: props.data.uid,
         name: props.data.name,
@@ -43,24 +46,17 @@ export default function TeacherManagmentModalDelete(props: any) {
 
     const handleDelete = async () => {
         try {
-            // Una vez que tienes el UID, puedes eliminar el usuario
-            onAuthStateChanged(authValidation, async (user) => {
-                //Saca el token del usuario
-                if (user) {
-                    // El usuario está autenticado, obtenemos el token
-                    const token = await user.getIdToken();
-                    await deleteTeacher(token, teacher.uid).then((res) => {
-                        if (res && res.email === teacher.email) {
 
-                            props.setUpdate((prevState: boolean) => !prevState);
-                            toast.success("Account deleted successfully");
-                            props.cerrar(true);
-                        } else {
-                            notifyError(res?.message?.message);
-                        }
-                    });
+            await deleteTeacher(token, teacher.uid).then((res) => {
+                if (res && res.email === teacher.email) {
+
+                    props.setUpdate((prevState: boolean) => !prevState);
+                    toast.success("Account deleted successfully");
+                    props.cerrar(true);
+                } else {
+                    notifyError(res?.message?.message);
                 }
-            })
+            });
         } catch (error) {
             toast.error("No se pudo eliminar el usuario");
         }

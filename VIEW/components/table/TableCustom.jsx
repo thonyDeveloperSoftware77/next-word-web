@@ -32,7 +32,7 @@ const statusColorMap = {
 };
 
 
-export default function TableCustom({  ...props }) {
+export default function TableCustom({ ...props }) {
   console.log("TableCustom")
   console.log(props.users)
   const INITIAL_VISIBLE_COLUMNS = props.INITIAL_VISIBLE_COLUMNS
@@ -56,7 +56,7 @@ export default function TableCustom({  ...props }) {
   }
 
   const OpenModalCreate = () => {
-    console.log("OpenModalCreate")  
+    console.log("OpenModalCreate")
     setModalCreate(true)
   }
 
@@ -138,7 +138,7 @@ export default function TableCustom({  ...props }) {
       case "name":
         return (
           <User
-            avatarProps={{ radius: "full", size: "sm",name: user.name }}
+            avatarProps={{ radius: "full", size: "sm", name: user.name }}
             classNames={{
               description: "text-default-500",
             }}
@@ -147,6 +147,12 @@ export default function TableCustom({  ...props }) {
           >
             {user.name}
           </User>
+        );
+      case 'code':
+        return (
+          <div className="flex flex-col">
+            <p className="text-bold text-small capitalize">{user.code}</p>
+          </div>
         );
       case "email":
         return (
@@ -165,6 +171,41 @@ export default function TableCustom({  ...props }) {
             {user.state ? "active" : "inactive"}
           </Chip>
         );
+
+      case "duration":
+        return (
+          <div className="flex flex-col">
+            <p className="text-bold text-small capitalize">{user.duration}</p>
+          </div>
+        );
+
+      case "start_date":
+        return (
+          <div className="flex flex-col">
+            <p className="text-bold text-small capitalize">{user.start_date}</p>
+          </div>
+        );
+
+      case "end_date":
+        return (
+          <div className="flex flex-col">
+            <p className="text-bold text-small capitalize">{user.end_date}</p>
+          </div>
+        );
+
+      case "level":
+        return (
+          <div className="flex flex-col">
+            <p className="text-bold text-small capitalize">{user.level}</p>
+          </div>
+        );
+
+      case "course_content":
+        return (
+          <div className="flex flex-col">
+            <p className="text-bold text-small capitalize">{user.course_content}</p>
+          </div>
+        );
       case "actions":
         return (
           <div className="relative flex justify-end items-center gap-2">
@@ -176,8 +217,8 @@ export default function TableCustom({  ...props }) {
               </DropdownTrigger>
               <DropdownMenu>
                 <DropdownItem>View</DropdownItem>
-                <DropdownItem onPress={()=>OpenModalEdit(user)}>Edit</DropdownItem>
-                <DropdownItem onPress={()=>OpenModalDelete(user)} >Delete</DropdownItem>
+                <DropdownItem onPress={() => OpenModalEdit(user)}>Edit</DropdownItem>
+                <DropdownItem onPress={() => OpenModalDelete(user)} >Delete</DropdownItem>
               </DropdownMenu>
             </Dropdown>
           </div>
@@ -272,7 +313,7 @@ export default function TableCustom({  ...props }) {
               </DropdownMenu>
             </Dropdown>
             <Button
-              onPress={()=>OpenModalCreate()}
+              onPress={() => OpenModalCreate()}
               className="bg-foreground text-background"
               endContent={<PlusIcon />}
               size="sm"

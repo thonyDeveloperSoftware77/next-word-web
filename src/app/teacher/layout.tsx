@@ -42,7 +42,8 @@ const TeacherLayout = ({ children }: { children: React.ReactNode }) => {
                     { name: 'Dashboard', path: '/teacher/dashboard' },
                     { name: 'Perfil', path: '/teacher/profile' },
                     { name: 'Cursos', path: '/teacher/courses'},
-                    { name: 'Words', path: '/teacher/words'}
+                    { name: 'Words', path: '/teacher/words'},
+                    { name: 'Reportes', path: '/teacher/reporte'}
 
                 ]} />
             </aside>

@@ -21,6 +21,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "VIEW/components/navbar/NavbarCustom.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "VIEW/components/navbar/NavbarCustom.jsx", "src/app/teacher/reporte/page.jsx"],
   "exclude": ["node_modules"]
 }

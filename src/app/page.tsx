@@ -22,7 +22,7 @@ export default function Home() {
   const [studentLogin, setStudentLogin] = useState(initialState);
   const [studentRegister, setStudentRegister] = useState<StudentInput>({
     ...initialState,
-    name:''
+    name: ''
   });
 
   const handleChange = (setter: any) => (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -52,17 +52,13 @@ export default function Home() {
   async function handleAuth() {
     try {
       // Signed in
-      try {
-        await logIn(teacher.email, teacher.password);
-        console.log("Authentication successful");
-        toast.success("Inicio de sesión exitoso");
-        router.push('/dashboard');
-      } catch (error: any) {
-        console.log(error.message);
-      }
-
+      await logIn(teacher.email, teacher.password).then
+      console.log("Authentication successful");
+      toast.success("Inicio de sesión exitoso");
 
       router.push('/teacher');
+
+
     } catch (error) {
       // An error occurred during authentication
       console.error("Authentication error:", error);

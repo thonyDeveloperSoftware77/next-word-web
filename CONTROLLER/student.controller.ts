@@ -14,7 +14,7 @@ export async function createStudent(  student: StudentInput) {
     };
 
     try {
-        const response = await fetch("https://08e5-179-49-52-137.ngrok-free.app/student", requestOptions);
+        const response = await fetch(" https://next-word-backend-1.onrender.com/student", requestOptions);
         
         const result = await response.json();
         console.log(result);

@@ -3,10 +3,14 @@ import Teacher from "../MODEL/Teacher";
 import { getCookie } from "cookies-next";
 
 export async function getTeachers(token: string): Promise<Teacher[]> {
+    console.log('token', token)
     try {
-        const response = await fetch("https://08e5-179-49-52-137.ngrok-free.app/teacher",{
+        const response = await fetch(" https://next-word-backend-1.onrender.com/teacher",{
+            method: 'GET',
+
             headers: {
               'Authorization': `Bearer ${token}`, // Aquí es donde incluyes el token de Firebase
+              'Content-Type': 'application/json'
             },
         })
         const result = await response.json();
@@ -29,9 +33,11 @@ export async function getTeacher(uid: string): Promise<Teacher | undefined> {
     const tokenCookie = await getCookie('auth-token')
     const token = String(tokenCookie)
     try {
-        const response = await fetch(`https://08e5-179-49-52-137.ngrok-free.app/teacher/${uid}`,{
+        const response = await fetch(` https://next-word-backend-1.onrender.com/teacher/${uid}`,{
+            method: 'GET',
             headers: {
               'Authorization': `Bearer ${token}`, // Aquí es donde incluyes el token de Firebase
+              'Content-Type': 'application/json'
             },
         })
         const result = await response.json();
@@ -60,7 +66,7 @@ export async function createTeacher(token:string,  teacher: Teacher) {
     };
 
     try {
-        const response = await fetch("https://08e5-179-49-52-137.ngrok-free.app/teacher", requestOptions);
+        const response = await fetch(" https://next-word-backend-1.onrender.com/teacher", requestOptions);
         const result = await response.json();
         return result;
     } catch (error) {
@@ -83,7 +89,7 @@ export async function updateTeacher(token:string,  uid: string, name: string, st
     };
 
     try {
-        const response = await fetch(`https://08e5-179-49-52-137.ngrok-free.app/teacher/${uid}`, requestOptions);
+        const response = await fetch(` https://next-word-backend-1.onrender.com/teacher/${uid}`, requestOptions);
         const result = await response.json();
         return result;
     } catch (error) {
@@ -104,7 +110,7 @@ export async function deleteTeacher(token:string,  uid: string) {
     };
 
     try {
-        const response = await fetch(`https://08e5-179-49-52-137.ngrok-free.app/teacher/${uid}`, requestOptions);
+        const response = await fetch(` https://next-word-backend-1.onrender.com/teacher/${uid}`, requestOptions);
         const result = await response.json();
         return result;
     } catch (error) {

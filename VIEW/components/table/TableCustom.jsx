@@ -45,6 +45,7 @@ export default function TableCustom({ ...props }) {
   const [modalDelete, setModalDelete] = useState(false);
   const [modalCreate, setModalCreate] = useState(false);
   const [modalView, setModalView] = useState(false);
+  const [modalStudent, setModalStudent] = useState(false);
 
 
   //FUNCIONES PARA MODALES
@@ -60,14 +61,15 @@ export default function TableCustom({ ...props }) {
     setModalCreate(true)
   }
 
+  const OpenModalStudent = (user) => {
+    console.log("OpenModalStudent")
+    setModalData(user)
+    setModalStudent(true)
+  }
+
   const OpenModalDelete = (user) => {
     setModalData(user)
     setModalDelete(true)
-  }
-
-  const OpenModalView = (user) => {
-    setModalData(user)
-    setModalViewClient(true)
   }
 
   const CloseModal = () => {
@@ -75,6 +77,7 @@ export default function TableCustom({ ...props }) {
     setModalCreate(false)
     setModalDelete(false)
     setModalView(false)
+    setModalStudent(false)
   }
   const [filterValue, setFilterValue] = React.useState("");
   const [selectedKeys, setSelectedKeys] = React.useState(new Set([]));
@@ -216,7 +219,7 @@ export default function TableCustom({ ...props }) {
                 </Button>
               </DropdownTrigger>
               <DropdownMenu>
-                <DropdownItem>View</DropdownItem>
+                <DropdownItem onPress={() => OpenModalStudent(user)} >Students</DropdownItem>
                 <DropdownItem onPress={() => OpenModalEdit(user)}>Edit</DropdownItem>
                 <DropdownItem onPress={() => OpenModalDelete(user)} >Delete</DropdownItem>
               </DropdownMenu>
@@ -396,6 +399,8 @@ export default function TableCustom({ ...props }) {
       {modalCreate ? <ModalMediator {...props} request={"create"} type={props.option} data={modalData} cerrar={CloseModal} /> : null}
       {modalEdit ? <ModalMediator {...props} request={"edit"} type={props.option} data={modalData} cerrar={CloseModal} /> : null}
       {modalDelete ? <ModalMediator {...props} request={"delete"} type={props.option} data={modalData} cerrar={CloseModal} /> : null}
+      {modalView ? <ModalMediator {...props} request={"view"} type={props.option} data={modalData} cerrar={CloseModal} /> : null}
+      {modalStudent ? <ModalMediator {...props} request={"students"} type={props.option} data={modalData} cerrar={CloseModal} /> : null}
 
 
       <Table

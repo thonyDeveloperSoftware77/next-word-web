@@ -26,3 +26,14 @@ export interface Course {
     type: "private" | "free"; 
     teacher_uid: string;
 }
+
+export interface CourseStudent{
+    id: number;
+    status: number,
+    student: {
+        uid: string;
+        name: string;
+        email: string;
+    }
+    
+}

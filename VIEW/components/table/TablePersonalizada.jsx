@@ -27,7 +27,7 @@ import ModalMediator from "../../ModalMediator";
 
 
 
-export default function TableCustom({ ...props }) {
+export default function TablePersonalizada({ ...props }) {
   console.log("TableCustom")
   console.log(props.users)
   const INITIAL_VISIBLE_COLUMNS = props.INITIAL_VISIBLE_COLUMNS

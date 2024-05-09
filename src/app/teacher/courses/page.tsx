@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useAuth } from '../../../../VIEW/providers/AuthContextProviderAdmin';
 import  {Course}  from '../../../../MODEL/Course';
 import { getCourseByTeacher } from '../../../../CONTROLLER/course.controller';
-import TableCustom from '../../../../VIEW/components/table/tableCustom';
+import TablePersonalizada from '../../../../VIEW/components/table/TablePersonalizada';
 export default function CourseManagment() {
     const [data, setData] = useState<Course[]>([]);
     const { token, user } = useAuth();
@@ -39,7 +39,7 @@ export default function CourseManagment() {
     const INITIAL_VISIBLE_COLUMNS = ["code", "name",  "duration", "start_date", "end_date",  "level","course_content", "actions"];
     return (
         <div>
-            {data == undefined ? <p></p> : <TableCustom setUpdate={setUpdate} columns={columns} INITIAL_VISIBLE_COLUMNS={INITIAL_VISIBLE_COLUMNS} users={data} option={"CourseManagment"} />}
+            {data == undefined ? <p></p> : <TablePersonalizada setUpdate={setUpdate} columns={columns} INITIAL_VISIBLE_COLUMNS={INITIAL_VISIBLE_COLUMNS} users={data} option={"CourseManagment"} />}
         </div>
     );
 }

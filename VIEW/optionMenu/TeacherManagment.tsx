@@ -1,12 +1,11 @@
 import dynamic from 'next/dynamic';
-
-import TableCustom from '../components/table/tableCustom';
 import { useEffect, useState } from 'react';
 import { getTeachers } from '../../CONTROLLER/teacher.controller';
 import Teacher from '../../MODEL/Teacher';
 import { onAuthStateChanged } from 'firebase/auth';
 import { authValidation } from '../../BD/firebase';
 import { useAuth } from '../providers/AuthContextProviderAdmin';
+import TablePersonalizada from '../components/table/TablePersonalizada';
 export default function TeacherManagment() {
     const [data, setData] = useState<Teacher[]>([]);
     const { token } = useAuth();
@@ -32,7 +31,7 @@ export default function TeacherManagment() {
     const INITIAL_VISIBLE_COLUMNS = ["name", "email", "state", "actions"];
     return (
         <div>
-            {data == undefined ? <p></p> : <TableCustom setUpdate={setUpdate} columns={columns} INITIAL_VISIBLE_COLUMNS={INITIAL_VISIBLE_COLUMNS} users={data} option={"TeacherManagment"} />}
+            {data == undefined ? <p></p> : <TablePersonalizada setUpdate={setUpdate} columns={columns} INITIAL_VISIBLE_COLUMNS={INITIAL_VISIBLE_COLUMNS} users={data} option={"TeacherManagment"} />}
         </div>
     );
 }

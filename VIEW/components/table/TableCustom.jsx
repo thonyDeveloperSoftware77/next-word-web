@@ -25,11 +25,6 @@ import { statusOptions } from "./data";
 import { capitalize } from "./utils";
 import ModalMediator from "../../ModalMediator";
 
-const statusColorMap = {
-  active: "success",
-  paused: "danger",
-  vacation: "warning",
-};
 
 
 export default function TableCustom({ ...props }) {

@@ -2,7 +2,7 @@ import {Course, CourseStudent} from "../MODEL/Course";
 
 export async function getCourseByTeacher(token: string, uid: string): Promise<Course[]> {
     try {
-        const response = await fetch(`http://localhost:3001/course/teacher/${uid}`, {
+        const response = await fetch(`https://08e5-179-49-52-137.ngrok-free.app/course/teacher/${uid}`, {
             headers: {
                 'Authorization': `Bearer ${token}`, // Aquí es donde incluyes el token de Firebase
             },
@@ -17,11 +17,11 @@ export async function getCourseByTeacher(token: string, uid: string): Promise<Co
     }
 }
 
-//http://localhost:3001/course/student/13
+//https://08e5-179-49-52-137.ngrok-free.app/course/student/13
 export async function getCourseByStudent(token: string, course_id: string): Promise<CourseStudent[]> {
     console.log(course_id)
     try {
-        const response = await fetch(`http://localhost:3001/course/student/${course_id}`, {
+        const response = await fetch(`https://08e5-179-49-52-137.ngrok-free.app/course/student/${course_id}`, {
             headers: {
                 'Authorization': `Bearer ${token}`, // Aquí es donde incluyes el token de Firebase
             },
@@ -53,7 +53,7 @@ export async function createCourse(token: string, course: Course) {
     };
 
     try {
-        const response = await fetch("http://localhost:3001/course", requestOptions);
+        const response = await fetch("https://08e5-179-49-52-137.ngrok-free.app/course", requestOptions);
         const result = await response.json();
         return result;
     } catch (error) {
@@ -77,7 +77,7 @@ export async function updateCourse(token: string, id: number, name: string, code
     };
 
     try {
-        const response = await fetch(`http://localhost:3001/course/${id}`, requestOptions);
+        const response = await fetch(`https://08e5-179-49-52-137.ngrok-free.app/course/${id}`, requestOptions);
         const result = await response.json();
         return result;
     } catch (error) {
@@ -103,7 +103,7 @@ export async function changeStatusStudent(token: string, id: number, status: num
     };
 
     try {
-        const response = await fetch(`http://localhost:3001/course/student/status/${id}`, requestOptions);
+        const response = await fetch(`https://08e5-179-49-52-137.ngrok-free.app/course/student/status/${id}`, requestOptions);
         const result = await response.json();
         return result;
     } catch (error) {
@@ -125,7 +125,7 @@ export async function deleteCourse(token: string, id: number) {
     };
 
     try {
-        const response = await fetch(`http://localhost:3001/course/${id}`, requestOptions);
+        const response = await fetch(`https://08e5-179-49-52-137.ngrok-free.app/course/${id}`, requestOptions);
         const result = await response.json();
         return result;
     } catch (error) {

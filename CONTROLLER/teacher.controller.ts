@@ -4,7 +4,7 @@ import { getCookie } from "cookies-next";
 
 export async function getTeachers(token: string): Promise<Teacher[]> {
     try {
-        const response = await fetch("http://localhost:3001/teacher",{
+        const response = await fetch("https://08e5-179-49-52-137.ngrok-free.app/teacher",{
             headers: {
               'Authorization': `Bearer ${token}`, // Aquí es donde incluyes el token de Firebase
             },
@@ -29,7 +29,7 @@ export async function getTeacher(uid: string): Promise<Teacher | undefined> {
     const tokenCookie = await getCookie('auth-token')
     const token = String(tokenCookie)
     try {
-        const response = await fetch(`http://localhost:3001/teacher/${uid}`,{
+        const response = await fetch(`https://08e5-179-49-52-137.ngrok-free.app/teacher/${uid}`,{
             headers: {
               'Authorization': `Bearer ${token}`, // Aquí es donde incluyes el token de Firebase
             },
@@ -60,7 +60,7 @@ export async function createTeacher(token:string,  teacher: Teacher) {
     };
 
     try {
-        const response = await fetch("http://localhost:3001/teacher", requestOptions);
+        const response = await fetch("https://08e5-179-49-52-137.ngrok-free.app/teacher", requestOptions);
         const result = await response.json();
         return result;
     } catch (error) {
@@ -83,7 +83,7 @@ export async function updateTeacher(token:string,  uid: string, name: string, st
     };
 
     try {
-        const response = await fetch(`http://localhost:3001/teacher/${uid}`, requestOptions);
+        const response = await fetch(`https://08e5-179-49-52-137.ngrok-free.app/teacher/${uid}`, requestOptions);
         const result = await response.json();
         return result;
     } catch (error) {
@@ -104,7 +104,7 @@ export async function deleteTeacher(token:string,  uid: string) {
     };
 
     try {
-        const response = await fetch(`http://localhost:3001/teacher/${uid}`, requestOptions);
+        const response = await fetch(`https://08e5-179-49-52-137.ngrok-free.app/teacher/${uid}`, requestOptions);
         const result = await response.json();
         return result;
     } catch (error) {

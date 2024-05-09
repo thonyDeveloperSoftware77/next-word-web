@@ -666,7 +666,7 @@ export default function Page() {
                         <br /><br />
                         <Breadcrumbs
                             size="sm"
-                            onAction={(key) => setCurrentPage(key)}
+                            onAction={(key:any) => setCurrentPage(key)}
                             classNames={{
                                 list: "gap-2",
                             }}

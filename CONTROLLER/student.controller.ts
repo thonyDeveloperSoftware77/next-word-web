@@ -14,7 +14,7 @@ export async function createStudent(  student: StudentInput) {
     };
 
     try {
-        const response = await fetch("http://localhost:3001/student", requestOptions);
+        const response = await fetch("https://08e5-179-49-52-137.ngrok-free.app/student", requestOptions);
         
         const result = await response.json();
         console.log(result);

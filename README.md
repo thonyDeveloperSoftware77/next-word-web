@@ -26,3 +26,32 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 ## Flujo  de login y rutas protegidas
 ![image](https://github.com/thonyDeveloperSoftware77/next-word-web/assets/122832433/8d51e225-3625-4fa9-b194-9171a7a10cb5)
 
+## Funcionalidades:
+1. CRUD de profesores:
+
+    Permite crear, editar y eliminar profesores.
+    Las entradas de datos se validan en el backend para garantizar la integridad de la información.
+
+2. CRUD de cursos:
+
+    Permite crear, editar y eliminar cursos.
+    Las entradas de datos se validan en el backend para garantizar la integridad de la información.
+
+3. CRUD de cards:
+
+    Permite crear, editar y eliminar cards.
+    Las entradas de datos se validan en el backend para garantizar la integridad de la información.
+    La creación de cards se puede realizar de dos maneras:
+    - Objeto individual: Permite crear una card individual especificando los parámetros necesarios.
+    - JSON de cards: Permite crear varias cards de forma masiva mediante un archivo JSON. Esta funcionalidad solo está disponible para cuentas de administrador y valida la información mediante tokens y variables de entorno.
+    Las cards contienen los parámetros necesarios para el aprendizaje de inglés, como vocabulario, gramática y pronunciación.
+
+4. CRUD de similar cards:
+
+    Permite crear, editar y eliminar similar cards.
+    Las entradas de datos se validan en el backend para garantizar la integridad de la información.
+
+5. CRUD de estudiantes:
+
+    Permite crear, editar y eliminar estudiantes.
+    Las entradas de datos se validan en el backend para garantizar la integridad de la información.

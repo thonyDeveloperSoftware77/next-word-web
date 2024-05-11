@@ -37,6 +37,7 @@ export default function Home() {
       await createStudent(studentRegister).then((res) => {
         if (res.email === studentRegister.email) {
           toast.success("Student created successfully");
+          
         } else {
           toast.error(res.message.message);
         }
@@ -52,13 +53,15 @@ export default function Home() {
   async function handleAuth() {
     try {
       // Signed in
-      await logIn(teacher.email, teacher.password).then
-      console.log("Authentication successful");
-      toast.success("Inicio de sesión exitoso");
-
-      router.push('/teacher');
-
-
+      await logIn(teacher.email, teacher.password).then((res:any) => {
+        if (res) {
+          toast.success("Inicio de sesión exitoso");
+          router.push("/teacher");
+        } else {
+          toast.error("Inicio de sesión fallido");
+        }
+      }
+      );
     } catch (error) {
       // An error occurred during authentication
       console.error("Authentication error:", error);

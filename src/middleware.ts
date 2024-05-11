@@ -16,8 +16,10 @@ async function authenticate(request: NextRequest, noAuthURL: string, authorizedU
             return NextResponse.redirect(new URL(noAuthURL, request.nextUrl));
         }
         else if (authorizedUID && tokenVerify !== process.env.NEXT_PUBLIC_ADMIN_UID) {
-            console.log(authorizedUID)
+            console.log("TOKEN VERIFY")
             console.log(tokenVerify)
+            console.log("NEXT_PUBLIC_ADMIN_UID")
+            console.log(process.env.NEXT_PUBLIC_ADMIN_UID)
             console.log('No autorizado')
             //Redirect to login
             console.log('No xxautorizado')

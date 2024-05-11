@@ -39,8 +39,6 @@ const TeacherLayout = ({ children }: { children: React.ReactNode }) => {
         <div className="app">
             <aside className="sideBar">
                 <SideBar routes={[
-                    { name: 'Dashboard', path: '/teacher/dashboard' },
-                    { name: 'Perfil', path: '/teacher/profile' },
                     { name: 'Cursos', path: '/teacher/courses'},
                     { name: 'Words', path: '/teacher/words'},
                     { name: 'Reportes', path: '/teacher/reporte'}

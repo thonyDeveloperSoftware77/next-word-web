@@ -36,22 +36,31 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 
     Permite crear, editar y eliminar cursos.
     Las entradas de datos se validan en el backend para garantizar la integridad de la información.
+   ![image](https://github.com/thonyDeveloperSoftware77/next-word-web/assets/122832433/d84dec5c-aecc-4d24-b277-c5b45d43b3b0)
 
-3. CRUD de cards:
+
+4. CRUD de cards:
 
     Permite crear, editar y eliminar cards.
     Las entradas de datos se validan en el backend para garantizar la integridad de la información.
     La creación de cards se puede realizar de dos maneras:
     - Objeto individual: Permite crear una card individual especificando los parámetros necesarios.
-    - JSON de cards: Permite crear varias cards de forma masiva mediante un archivo JSON. Esta funcionalidad solo está disponible para cuentas de administrador y valida la información mediante tokens y variables de entorno.
-    Las cards contienen los parámetros necesarios para el aprendizaje de inglés, como vocabulario, gramática y pronunciación.
+      ![image](https://github.com/thonyDeveloperSoftware77/next-word-web/assets/122832433/2058e6ca-2bac-4760-8da5-1774e5df096a)
 
-4. CRUD de similar cards:
+    - JSON de cards: Permite crear varias cards de forma masiva mediante un archivo JSON. Esta funcionalidad solo está disponible para cuentas de administrador y valida la información mediante tokens y variables de entorno.
+    Las cards contienen los parámetros necesarios para el aprendizaje de inglés, como vocabulario y ejemplos.
+![image](https://github.com/thonyDeveloperSoftware77/next-word-web/assets/122832433/8987d45a-ac8d-4dbd-b7ad-ade08db4bf9c)
+
+
+5. CRUD de similar cards:
 
     Permite crear, editar y eliminar similar cards.
     Las entradas de datos se validan en el backend para garantizar la integridad de la información.
+   ![image](https://github.com/thonyDeveloperSoftware77/next-word-web/assets/122832433/1f5635a0-b49f-43b6-b1d6-fe35e2fe12c6)
 
-5. CRUD de estudiantes:
 
-    Permite crear, editar y eliminar estudiantes.
+6. CRUD de estudiantes:
+
+    Permite crear y manejar estudiantes por curso, con estados como activo, denegado, en espera.
     Las entradas de datos se validan en el backend para garantizar la integridad de la información.
+   ![image](https://github.com/thonyDeveloperSoftware77/next-word-web/assets/122832433/d04126d2-6fae-4fb6-92a1-39f2c9bd2682)

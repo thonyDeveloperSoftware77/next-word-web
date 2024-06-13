@@ -11,7 +11,7 @@ import { useAuth } from "../../../VIEW/providers/AuthContextProviderAdmin";
 
 function AdminPage() {
   const router = useRouter();
-  const { verifyAdminAccount } = useAuth();
+  const { verifyUserAccount } = useAuth();
   const [admin, setAdmin] = useState({
     email: '',
     password: ''
@@ -30,7 +30,7 @@ function AdminPage() {
   
 
   async function handleAuth() {
-    const verify = await verifyAdminAccount(admin.email, admin.password)
+    const verify = await verifyUserAccount(admin.email, admin.password)
     if (verify) {
       toast.success("Inicio de sesión exitoso")
       router.push('/admin/dashboard')

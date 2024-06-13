@@ -11,7 +11,7 @@ import { StudentInput } from "../../MODEL/Student";
 
 export default function Home() {
   const router = useRouter();
-  const { logIn } = useAuth();
+  const { verifyUserAccount } = useAuth();
   const [currentPage, setCurrentPage] = useState("Teacher");
   const initialState = {
     email: '',
@@ -50,25 +50,27 @@ export default function Home() {
 
 
   }
-  async function handleAuth() {
+  const handleAuth = async (email: string, password: string) =>{
     try {
-      // Signed in
-      await logIn(teacher.email, teacher.password).then((res:any) => {
-        if (res) {
-          toast.success("Inicio de sesión exitoso");
-          router.push("/teacher");
+        const role = await verifyUserAccount(email, password);
+        if (role) {
+            toast.success("Inicio de sesión exitoso");
+            if (role === 'admin') {
+                router.push("/admin");
+            } else if (role === 'teacher') {
+                router.push("/teacher");
+            } else if (role === 'student') {
+                router.push("/student");
+            }
         } else {
-          toast.error("Inicio de sesión fallido");
+            toast.error("Inicio de sesión fallido");
         }
-      }
-      );
     } catch (error) {
-      // An error occurred during authentication
-      console.error("Authentication error:", error);
-      toast.error("Inicio de sesión fallido");
+        console.error("Authentication error:", error);
+        toast.error("Inicio de sesión fallido");
     }
+}
 
-  }
 
   const auth = getAuth();
   const googleLogin = () => {
@@ -156,7 +158,7 @@ export default function Home() {
                 value={teacher.password}
                 onChange={handleChange(setTeacher)}
               />
-              <Button color="primary" onPress={handleAuth}>
+              <Button color="primary" onPress={()=>handleAuth(teacher.email, teacher.password)}>
                 Action
               </Button>
             </CardBody>
@@ -211,7 +213,7 @@ export default function Home() {
                 value={studentLogin.password}
                 onChange={handleChange(setStudentLogin)}
               />
-              <Button color="primary" onPress={handleAuth}>
+              <Button color="primary" onPress={()=> handleAuth(studentLogin.email, studentLogin.password)}>
                 Action
               </Button>
             </CardBody>

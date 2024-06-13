@@ -6,7 +6,6 @@ import { signOut } from "firebase/auth";
 import { authValidation } from "../../../BD/firebase";
 
 export default function NavbarCustom({ data }) {
-    console.log(data);
     //Funcion para cerrar sesion
     const logout = () => {
         signOut(authValidation).then(() => {

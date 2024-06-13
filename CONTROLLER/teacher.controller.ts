@@ -6,7 +6,7 @@ import { getCookie } from "cookies-next";
 export async function getTeachers(token: string): Promise<Teacher[]> {
     console.log('token', token)
     try {
-        const response = await fetch(" https://next-word-backend-1.onrender.com/teacher", {
+        const response = await fetch("http://localhost:3001/teacher", {
             method: 'GET',
 
             headers: {
@@ -34,7 +34,7 @@ export async function getTeacher(uid: string): Promise<Teacher | undefined> {
     const tokenCookie = await getCookie('auth-token')
     const token = String(tokenCookie)
     try {
-        const response = await fetch(` https://next-word-backend-1.onrender.com/teacher/${uid}`, {
+        const response = await fetch(`http://localhost:3001/teacher/${uid}`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`, // Aquí es donde incluyes el token de Firebase
@@ -68,7 +68,7 @@ export async function createTeacher(token: string, teacher: Teacher) {
 
     try {
         console.log('Entrando')
-        const response = await fetch(" https://next-word-backend-1.onrender.com/teacher", requestOptions);
+        const response = await fetch("http://localhost:3001/teacher", requestOptions);
         const result = await response.json();
         if (response.ok) {
             return result;
@@ -96,7 +96,7 @@ export async function updateTeacher(token: string, uid: string, name: string, st
     };
 
     try {
-        const response = await fetch(` https://next-word-backend-1.onrender.com/teacher/${uid}`, requestOptions);
+        const response = await fetch(`http://localhost:3001/teacher/${uid}`, requestOptions);
         const result = await response.json();
         return result;
     } catch (error) {
@@ -117,7 +117,7 @@ export async function deleteTeacher(token: string, uid: string) {
     };
 
     try {
-        const response = await fetch(` https://next-word-backend-1.onrender.com/teacher/${uid}`, requestOptions);
+        const response = await fetch(`http://localhost:3001/teacher/${uid}`, requestOptions);
         const result = await response.json();
         return result;
     } catch (error) {

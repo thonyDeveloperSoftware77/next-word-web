@@ -46,8 +46,7 @@
     display: grid;
     gap: 1rem;
     grid-auto-rows: 22rem;
-
-    grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
 }
 
 .gallery_v2 {
@@ -62,12 +61,28 @@
 
 }
 
+.container_reporte {
+    padding: 50px;
+
+
+}
+
+.box_reporte {
+    padding: 20px;
+    margin: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-color: #f5f5f5;
+
+}
+
 .cardPanel {
     overflow: auto;
     background-color: #f5f5f5;
     border-radius: 10px;
     padding: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    height: 80vh;
 }
 
 .flexCol {

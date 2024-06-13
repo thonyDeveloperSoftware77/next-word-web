@@ -4,3 +4,10 @@ export  interface StudentInput {
     password: string;
 }
 
+
+export  interface StudentOutput {
+    uid: string;
+    name: string;
+    email: string;
+}
+

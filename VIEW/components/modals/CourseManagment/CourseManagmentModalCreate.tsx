@@ -19,7 +19,6 @@ export default function CourseManagmentModalCreate(props: any) {
         name: "",
         description: "",
         code: "",
-        duration: "",
         start_date: "",
         course_content: "",
         level: "A1",
@@ -30,8 +29,6 @@ export default function CourseManagmentModalCreate(props: any) {
         prerequisites: "",
         type: "private"
     });
-
-    const [duration, setDuration] = useState<string>("10 weeks");
 
     const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
     const [isVisible, setIsVisible] = React.useState(false);
@@ -212,48 +209,8 @@ export default function CourseManagmentModalCreate(props: any) {
 
                                             </Select>
                                         </div>
-                                        <div style={{ marginLeft: "5px", width: "50%" }}>
-                                            <Input
-                                                label="Start Date"
-                                                variant="bordered"
-                                                placeholder="Enter the start date"
-                                                type="date"
-                                                className="max-w-xs"
-                                                name="start_date"
-                                                value={course.start_date}
-                                                onChange={handleChange}
-                                            />
-                                        </div>
+                                       
                                     </div>
-
-                                    <div style={{ display: "flex", margin: "5px" }}>
-                                        <Select
-                                            label="Duration"
-                                            variant="bordered"
-                                            placeholder="Seleccione la sucursal"
-                                            className="max-w-xs"
-                                            onSelectionChange={(value) => {
-                                                let arrayValue = Array.from(value);
-                                                handleChange({ target: { name: "duration", value: arrayValue[0] } } as any)
-                                            }}
-
-                                        >
-                                            <SelectItem key="4 weeks" value="4 weeks">
-                                                4 weeks
-                                            </SelectItem>
-                                            <SelectItem key="8 weeks" value="8 weeks">
-                                                8 weeks
-                                            </SelectItem>
-                                            <SelectItem key="12 weeks" value="12 weeks">
-                                                12weeks
-                                            </SelectItem>
-                                            <SelectItem key="16 weeks" value="16 weeks">
-                                                16 weeks
-                                            </SelectItem>
-
-                                        </Select>
-                                    </div>
-
 
 
                                 </div>

@@ -23,9 +23,6 @@ export default function CourseManagment() {
         { name: "Codigo", uid: "code", sortable: true },
         { name: "Nombre", uid: "name", sortable: true },
         { name: "Descripcion", uid: "description", sortable: true },
-        { name: "Duracion", uid: "duration", sortable: true },
-        { name: "Fecha de Inicio", uid: "start_date", sortable: true },
-        { name: "Fecha de Fin", uid: "end_date", sortable: true },
         { name: "Instructor", uid: "instructor", sortable: true },
         { name: "Contenido del Curso", uid: "course_content", sortable: true },
         { name: "Nivel", uid: "level", sortable: true },
@@ -36,7 +33,7 @@ export default function CourseManagment() {
     ]
 
     //Nombre de los atributos de la tabla de Emails
-    const INITIAL_VISIBLE_COLUMNS = ["code", "name",  "duration", "start_date", "end_date",  "level","course_content", "actions"];
+    const INITIAL_VISIBLE_COLUMNS = ["code", "name",    "level","course_content", "actions"];
     return (
         <div>
             {data == undefined ? <p></p> : <TablePersonalizada setUpdate={setUpdate} columns={columns} INITIAL_VISIBLE_COLUMNS={INITIAL_VISIBLE_COLUMNS} users={data} option={"CourseManagment"} />}

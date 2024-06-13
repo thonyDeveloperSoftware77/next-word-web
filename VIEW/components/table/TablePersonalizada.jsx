@@ -170,12 +170,6 @@ export default function TablePersonalizada({ ...props }) {
           </Chip>
         );
 
-      case "duration":
-        return (
-          <div className="flex flex-col">
-            <p className="text-bold text-small capitalize">{user.duration}</p>
-          </div>
-        );
 
       case "start_date":
         return (
@@ -215,8 +209,17 @@ export default function TablePersonalizada({ ...props }) {
               </DropdownTrigger>
               <DropdownMenu>
                 <DropdownItem onPress={() => OpenModalStudent(user)} >Students</DropdownItem>
-                <DropdownItem onPress={() => OpenModalEdit(user)}>Edit</DropdownItem>
-                <DropdownItem onPress={() => OpenModalDelete(user)} >Delete</DropdownItem>
+                {
+                  props.option !== "CourseManagment" ?
+                    (
+                      <>
+                        <DropdownItem onPress={() => OpenModalEdit(user)}>Edit</DropdownItem>
+                        <DropdownItem onPress={() => OpenModalDelete(user)} >Delete</DropdownItem>
+                      </>
+                    ): null
+
+                }
+
               </DropdownMenu>
             </Dropdown>
           </div>

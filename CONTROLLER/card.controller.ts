@@ -2,7 +2,7 @@ import { CardModel, CardSimilarModel, CardSimilarModelInput } from "../MODEL/Car
 
 export async function getCardsByCourse(token: string, course_id: number): Promise<CardModel[]> {
     try {
-        const response = await fetch(` https://next-word-backend-1.onrender.com/card/course/${course_id}`, {
+        const response = await fetch(`http://localhost:3001/card/course/${course_id}`, {
             method: "GET",
             headers: {
                 'Authorization': `Bearer ${token}`, // Aquí es donde incluyes el token de Firebase
@@ -21,7 +21,7 @@ export async function getCardsByCourse(token: string, course_id: number): Promis
 
 export async function getSimilarCard(token: string,  card_id: number): Promise<CardSimilarModel | null> {
     try {
-        const response = await fetch(` https://next-word-backend-1.onrender.com/card_similar/${card_id}`, {
+        const response = await fetch(`http://localhost:3001/card_similar/${card_id}`, {
             method: "GET",
             headers: {
                 'Authorization': `Bearer ${token}`, // Aquí es donde incluyes el token de Firebase
@@ -59,7 +59,7 @@ export async function createCard(token: string, course: CardModel) {
     };
 
     try {
-        const response = await fetch(" https://next-word-backend-1.onrender.com/card", requestOptions);
+        const response = await fetch("http://localhost:3001/card", requestOptions);
         const result = await response.json();
         if (response.ok) {
             return result;
@@ -87,7 +87,7 @@ export async function createCards(token: string, courses: CardModel[]) {
     };
 
     try {
-        const response = await fetch(" https://next-word-backend-1.onrender.com/card/many", requestOptions);
+        const response = await fetch("http://localhost:3001/card/many", requestOptions);
         const result = await response.json();
         if (response.ok) {
             return result;
@@ -129,7 +129,7 @@ export async function createSimilarCard(token: string, course_id:number,  simila
     };
 
     try {
-        const response = await fetch(` https://next-word-backend-1.onrender.com/card_similar/${course_id}`, requestOptions);
+        const response = await fetch(`http://localhost:3001/card_similar/${course_id}`, requestOptions);
         const result = await response.json();
         if (response.ok) {
             return result;
@@ -160,7 +160,7 @@ export async function updateCard(token: string, course: CardModel) {
     };
 
     try {
-        const response = await fetch(` https://next-word-backend-1.onrender.com/card/${course.id}`, requestOptions);
+        const response = await fetch(`http://localhost:3001/card/${course.id}`, requestOptions);
         const result = await response.json();
         if (response.ok) {
             return result;
@@ -202,7 +202,7 @@ export async function updateSimilarCard(token: string, course_id:number,  simila
     };
 
     try {
-        const response = await fetch(` https://next-word-backend-1.onrender.com/card_similar/${course_id}`, requestOptions);
+        const response = await fetch(`http://localhost:3001/card_similar/${course_id}`, requestOptions);
         const result = await response.json();
         if (response.ok) {
             return result;

@@ -1,29 +1,22 @@
 
 'use client'
-import { Avatar, BreadcrumbItem, Breadcrumbs, Card, CardBody, CardFooter, CardHeader, Divider, Select, SelectItem } from '@nextui-org/react';
+import { Avatar, BreadcrumbItem, Breadcrumbs, Button, Card, CardBody, CardFooter, CardHeader, Divider, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Select, SelectItem, useDisclosure } from '@nextui-org/react';
 import { LiquidGauge } from '../../../../VIEW/components/chart/LiquidGauge';
 import Radar from '../../../../VIEW/components/chart/Radar';
 import { useEffect, useState } from 'react';
 import { getCourseByTeacher } from '../../../../CONTROLLER/course.controller';
 import { useAuth } from '../../../../VIEW/providers/AuthContextProviderAdmin';
 import { Course } from '../../../../MODEL/Course';
-import { compareLearningRateBetweenStudents, getReporte } from '../../../../CONTROLLER/compare';
+import { comparationBetweenDates, compareLearningRateBetweenStudents, getReporte } from '../../../../CONTROLLER/compare';
+import { toast } from 'react-toastify';
 
 
 
 export default function ReportePage() {
-  const [currentPage, setCurrentPage] = useState([]);
+  const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
+
   const [dataCourses, setDataCourses] = useState([]);
-  const [dataCourse, setDataCourse] = useState();
-  const [dataEstudiante, setDataEstudiante] = useState();
-  const [optionSelected, setOptionSelected] = useState({
-    option: "all",
-    id: 0,
-    selected: true,
-  });
 
-
-  const [dataLearningRateBetweenStudents, setDataLearningRateBetweenStudents] = useState();
 
   const [report, setReport] = useState();
   const { token, user } = useAuth();
@@ -33,6 +26,34 @@ export default function ReportePage() {
   const [selectedCourse2, setSelectedCourse2] = useState(null);
   const [selectedStudent1, setSelectedStudent1] = useState(null);
   const [selectedStudent2, setSelectedStudent2] = useState(null);
+
+  const [sinonimoRecomendation, setSinonimoRecomendation] = useState([]);
+
+  const [dateCompare, setDateCompare] = useState({
+    date1: '',
+    date2: ''
+  });
+
+  const [comapationDates, setComapationDates] = useState([]);
+
+  const handleClickCompareDates = () => {
+    console.log(dateCompare);
+    //Validacion de Fechas 
+    if (dateCompare.date1 === '' || dateCompare.date2 === '') {
+      toast.error('Debe seleccionar ambas fechas');
+      return;
+    }
+    //Validar que la fecha 1 sea menor a la fecha 2
+    if (dateCompare.date1 > dateCompare.date2) {
+      toast.error('La fecha 1 debe ser menor a la fecha 2');
+      return;
+    }
+    comparationBetweenDates(dateCompare.date1, dateCompare.date2).then((res) => {
+      setComapationDates(res);
+    });
+  };
+
+
 
   const handleCourseChange1 = (e) => {
     setSelectedCourse1(e.target.value);
@@ -131,6 +152,19 @@ export default function ReportePage() {
   }
 
 
+  const handleCerrar = () => {
+    setSinonimoRecomendation([]);
+    onOpenChange(false);
+
+  };
+
+  const handelOpenRecomendation = (palabrasSinonimo) => {
+    setSinonimoRecomendation(palabrasSinonimo);
+    onOpenChange(true);
+  }
+
+
+
 
   return (
     <div>
@@ -187,8 +221,18 @@ export default function ReportePage() {
                                 ))}
                               </ul>
                             )}
+                            {rec.palabrasSinonimo && (
+                              <ul className="list-disc list-inside">
+                                <Button
+                                  onPress={() => handelOpenRecomendation(rec.palabrasSinonimo)}
+                                >
+                                  Ver recomedaciones
+                                </Button>
+                              </ul>
+                            )}
                           </div>
                         ))}
+
                     </td>
                   </tr>
                 ))}
@@ -198,7 +242,7 @@ export default function ReportePage() {
           </div>
         ))}
       </div>
-      <br /><br />
+      <br />
 
       <div className='container_reporte'>
         <div className="flex space-x-4 mb-8">
@@ -442,6 +486,115 @@ export default function ReportePage() {
             </div>
           )}
         </div>
+        <br /><br />
+        <div>
+
+          <h2 className="text-xl font-semibold mb-4">Estudiantes que se han demorado más en aprender</h2>
+          <br />
+          <div className='flex gap-4'>
+            <div>
+              <Input
+                onChange={(e) => {
+                  console.log(e.target.value);
+                  setDateCompare({ ...dateCompare, date1: e.target.value });
+                }
+                }
+
+                type="date" className="border rounded px-4 py-2" />
+            </div>
+            <div>
+              <Input
+                onChange={(e) => {
+                  console.log(e.target.value);
+                  setDateCompare({ ...dateCompare, date2: e.target.value });
+                }
+                }
+                type="date" className="border rounded px-4 py-2" />
+            </div>
+            <Button
+              onPress={handleClickCompareDates}
+            >
+              Comparar
+            </Button>
+          </div>
+          {comapationDates.length > 0 && (
+            <div className="mb-8">
+              <h2 className="text-xl font-semibold mb-4">Estudiantes con Más Fechas de Revisión</h2>
+              <table className="min-w-full bg-white border border-gray-200">
+                <thead>
+                  <tr>
+                    <th className="py-2 px-4 border-b">Nombre del Estudiante</th>
+                    <th className="py-2 px-4 border-b">Total Fechas de Revisión</th>
+                    <th className="py-2 px-4 border-b">Curso</th>
+                    <th className="py-2 px-4 border-b">Días Totales</th>
+                    <th className="py-2 px-4 border-b">Fechas de Revisión</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {comapationDates.map((student, idx) => (
+                    <tr key={idx}>
+                      <td className="py-2 px-4 border-b">{student.nombre}</td>
+                      <td className="py-2 px-4 border-b">{student.totalFechasRevisiones}</td>
+                      <td className="py-2 px-4 border-b">{student.course_name}</td>
+                      <td className="py-2 px-4 border-b">{student.fechasRevisiones.length}</td>
+                      <td className="py-2 px-4 border-b">
+                        <ul>
+                          {student.fechasRevisiones.map((fecha, fechaIdx) => (
+                            <li key={fechaIdx}>{fecha}</li>
+                          ))}
+                        </ul>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+
+        </div>
+
+
+        <Modal
+          backdrop="opaque"
+          isOpen={isOpen}
+          onOpenChange={handleCerrar}
+          classNames={{
+            backdrop: "bg-gradient-to-t from-zinc-900 to-zinc-900/10 backdrop-opacity-20"
+          }}
+        >
+          <ModalContent>
+            {(onClose) => (
+              <>
+                <ModalHeader className="flex flex-col gap-1">Palabras recomendadas para refuerzo</ModalHeader>
+                <ModalBody>
+
+                  <table className="min-w-full bg-white border border-gray-200">
+                    <thead>
+                      <tr>
+                        <th className="py-2 px-4 border-b">Palabra</th>
+                        <th className="py-2 px-4 border-b">Sinonimos</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {sinonimoRecomendation.map((sinonimo, index) => (
+                        <tr key={index}>
+                          <td className="py-2 px-4 border-b">{sinonimo.palabra}</td>
+                          <td className="py-2 px-4 border-b">{sinonimo.sinonimos.join(', ')}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+
+                </ModalBody>
+                <ModalFooter>
+                  <Button color="danger" variant="light" onPress={handleCerrar}>
+                    Close
+                  </Button>
+                </ModalFooter>
+              </>
+            )}
+          </ModalContent>
+        </Modal>
 
 
       </div>

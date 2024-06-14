@@ -64,3 +64,9 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
     Permite crear y manejar estudiantes por curso, con estados como activo, denegado, en espera.
     Las entradas de datos se validan en el backend para garantizar la integridad de la información.
    ![image](https://github.com/thonyDeveloperSoftware77/next-word-web/assets/122832433/d04126d2-6fae-4fb6-92a1-39f2c9bd2682)
+
+
+   CORREO PARA ENTRAR AL ADMIN DE TEACHER
+   CORREO:prueba1.1.1@gmail.com
+   CONTRASEÑA: 12345678
+   

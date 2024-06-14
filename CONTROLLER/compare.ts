@@ -1,6 +1,6 @@
 export async function compareLearningRateBetweenStudents(token: string): Promise<[]> {
     try {
-        const response = await fetch(`http://localhost:3001/learn/compareLearningRateBetweenStudents`, {
+        const response = await fetch(`https://next-word-backend-1.onrender.com/learn/compareLearningRateBetweenStudents`, {
             method: "GET",
             headers: {
                 'Authorization': `Bearer ${token}`, // Aquí es donde incluyes el token de Firebase
@@ -19,7 +19,7 @@ export async function compareLearningRateBetweenStudents(token: string): Promise
 
 export async function analyzeEfficiencyByCategory(token: string): Promise<[]> {
     try {
-        const response = await fetch(`http://localhost:3001/learn/analyzeEfficiencyByCategory`, {
+        const response = await fetch(`https://next-word-backend-1.onrender.com/learn/analyzeEfficiencyByCategory`, {
             method: "GET",
             headers: {
                 'Authorization': `Bearer ${token}`, // Aquí es donde incluyes el token de Firebase
@@ -40,7 +40,7 @@ export async function analyzeEfficiencyByCategory(token: string): Promise<[]> {
 
 export async function identifyDifficultWordsByCourse(token: string): Promise<[]> {
     try {
-        const response = await fetch(`http://localhost:3001/learn/identifyDifficultWordsByCourse`, {
+        const response = await fetch(`https://next-word-backend-1.onrender.com/learn/identifyDifficultWordsByCourse`, {
             method: "GET",
             headers: {
                 'Authorization': `Bearer ${token}`, // Aquí es donde incluyes el token de Firebase
@@ -61,7 +61,7 @@ export async function identifyDifficultWordsByCourse(token: string): Promise<[]>
 
 export async function getReporte(token: string): Promise<[]> {
     try {
-        const response = await fetch(`http://localhost:3001/learn/compareLearningRateBetweenStudents`, {
+        const response = await fetch(`https://next-word-backend-1.onrender.com/learn/compareLearningRateBetweenStudents`, {
             method: "GET",
             headers: {
                 'Authorization': `Bearer ${token}`, // Aquí es donde incluyes el token de Firebase
@@ -82,7 +82,7 @@ export async function getReporte(token: string): Promise<[]> {
 
 export async function comparationBetweenDates(date1: string, date2: string): Promise<[]> {
     try {
-        const response = await fetch(`http://localhost:3001/learn/comparationBetweenDates`, {
+        const response = await fetch(`https://next-word-backend-1.onrender.com/learn/comparationBetweenDates`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'

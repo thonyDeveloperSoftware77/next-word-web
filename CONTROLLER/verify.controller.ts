@@ -5,7 +5,7 @@ interface UserType {
 
 export async function verifyToken(token: string): Promise<UserType | undefined> {
     try {
-        const response = await fetch(`http://localhost:3001/verify/${token}`);
+        const response = await fetch(`https://next-word-backend-1.onrender.com/verify/${token}`);
         
         const result = await response.json();
         console.log('result', result);

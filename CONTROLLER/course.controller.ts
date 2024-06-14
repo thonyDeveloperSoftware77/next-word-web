@@ -3,7 +3,7 @@ import { Course, CourseStudent } from "../MODEL/Course";
 export async function getCourseByTeacher(token: string, uid: string): Promise<Course[]> {
 
     try {
-        const response = await fetch(`http://localhost:3001/course/teacher/${uid}`, {
+        const response = await fetch(`https://next-word-backend-1.onrender.com/course/teacher/${uid}`, {
             method: "GET",
             headers: {
                 'Authorization': `Bearer ${token}`, // Aquí es donde incluyes el token de Firebase
@@ -27,7 +27,7 @@ console.log("token")
     console.log(token)
 
     try {
-        const response = await fetch(`http://localhost:3001/course`, {
+        const response = await fetch(`https://next-word-backend-1.onrender.com/course`, {
             method: "GET",
             headers: {
                 'Authorization': `Bearer ${token}`, // Aquí es donde incluyes el token de Firebase
@@ -43,11 +43,11 @@ console.log("token")
         return [];
     }
 }
-//http://localhost:3001/course/student/13
+//https://next-word-backend-1.onrender.com/course/student/13
 export async function getCourseByStudent(token: string, course_id: string): Promise<CourseStudent[]> {
     console.log(course_id)
     try {
-        const response = await fetch(`http://localhost:3001/course/student/${course_id}`, {
+        const response = await fetch(`https://next-word-backend-1.onrender.com/course/student/${course_id}`, {
             method: "GET",
             headers: {
                 'Authorization': `Bearer ${token}`, // Aquí es donde incluyes el token de Firebase
@@ -81,7 +81,7 @@ export async function createCourse(token: string, course: Course) {
     };
 
     try {
-        const response = await fetch("http://localhost:3001/course", requestOptions);
+        const response = await fetch("https://next-word-backend-1.onrender.com/course", requestOptions);
         const result = await response.json();
         return result;
     } catch (error) {
@@ -105,7 +105,7 @@ export async function updateCourse(token: string, id: number, name: string, code
     };
 
     try {
-        const response = await fetch(`http://localhost:3001/course/${id}`, requestOptions);
+        const response = await fetch(`https://next-word-backend-1.onrender.com/course/${id}`, requestOptions);
         const result = await response.json();
         return result;
     } catch (error) {
@@ -131,7 +131,7 @@ export async function changeStatusStudent(token: string, id: number, status: num
     };
 
     try {
-        const response = await fetch(`http://localhost:3001/course/student/status/${id}`, requestOptions);
+        const response = await fetch(`https://next-word-backend-1.onrender.com/course/student/status/${id}`, requestOptions);
         const result = await response.json();
         return result;
     } catch (error) {

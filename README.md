@@ -72,21 +72,6 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 
 
 
-# Principios Solid Aplicados
-
-1. Principio de Responsabilidad Única (SRP)
-- NestJS fomenta el uso de módulos, controladores, servicios y otros componentes para separar las preocupaciones de la aplicación. Cada componente tiene una responsabilidad específica.
-
-- Ejemplo:
-
-    - Controladores: Manejan las solicitudes HTTP.
-    - Servicios: Contienen la lógica de negocio.
-    - Módulos: Agrupan controladores y servicios relacionados.
-
-
-2. Principio de Inversión de Dependencias (Dependency Inversion Principle - DIP): 
-- Uso de inyección de dependencias para desacoplar las clases y mejorar la testabilidad
-
 
 # Patrones de Diseño
 # Principios Solid Aplicados

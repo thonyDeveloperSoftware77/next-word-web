@@ -69,4 +69,126 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
    CORREO PARA ENTRAR AL ADMIN DE TEACHER
    CORREO:prueba1.1.1@gmail.com
    CONTRASEÑA: 12345678
+
+   # Principios Solid Aplicados
+
+Principio de Responsabilidad Única (SRP)
+
+# Patrones de Diseño
+# Principios Solid Aplicados
+
+1. Principio de Responsabilidad Única (SRP)
+- NestJS fomenta el uso de módulos, controladores, servicios y otros componentes para separar las preocupaciones de la aplicación. Cada componente tiene una responsabilidad específica.
+
+     Ejemplo:
+
+        - Controladores: Manejan las solicitudes HTTP.
+        - Servicios: Contienen la lógica de negocio.
+        - Módulos: Agrupan controladores y servicios relacionados.
+
+
+2. Principio de Inversión de Dependencias (Dependency Inversion Principle - DIP): 
+- Uso de inyección de dependencias para desacoplar las clases y mejorar la testabilidad
+
+# Patrones de Diseño
+
+## 1. Patrón Singleton
+Los servicios son singleton por defecto, proporcionando una única instancia compartida en toda la aplicación.
+
+```typescript
+// student.service.ts
+import { Injectable } from '@nestjs/common';
+
+@Injectable()
+export class StudentService {
+    constructor(
+        @InjectRepository(Student)
+        private studentRepository: Repository<Student>,
+        @InjectRepository(Course)
+        private courseRepository: Repository<Course>,
+        @InjectRepository(StudentCourse)
+        private courseStudentRepository: Repository<StudentCourse>,
+        private firebaseRepository: FirebaseRepository
+    ) { }
+
+    // Métodos del servicio...
+}
+```
+
+## 2. Patrón Inyección de Dependencias (Dependency Injection)
+Facilita la creación y gestión de dependencias entre clases. NestJS lo hace de manera nativa usando el decorador `@Injectable()` en los servicios y la inyección de dependencias en el constructor.
+
+```typescript
+// firebase.repository.ts
+import { Inject, Injectable } from '@nestjs/common';
+import { app } from 'firebase-admin';
+
+@Injectable()
+export class FirebaseRepository {
+  constructor(@Inject('FIREBASE_APP') private firebaseApp: app.App) {}
+
+  async createUser(user: { email: string, password: string, role: 'admin' | 'teacher' | 'student' }) {
+    // Crear el usuario en Firebase Authentication
+  }
+}
+```
+
+3. Patrón Modular: Organiza la aplicación en módulos reutilizables y bien encapsulados.
+   ![image](https://github.com/user-attachments/assets/5f6ec9e1-8612-4053-bd6d-b07bd3d78850)
+
+
+## 4. Patrón Decorator
+Utiliza decoradores para definir metadatos y comportamientos adicionales en las clases y métodos, en este caso se utilizo un decorador para sacar el uid del token que entra por el auth.
+
+```typescript
+//CREACION DEL DECORADOR
+// user.decorator.ts
+import { createParamDecorator, ExecutionContext } from '@nestjs/common';
+
+export const User = createParamDecorator(
+  (data: unknown, ctx: ExecutionContext) => {
+    const request = ctx.switchToHttp().getRequest();
+    return request.user;
+  },
+);
+
+//USO DEL DECORADOR
+@Get('/findOne')
+    @UseGuards(FirebaseGuard)
+    findOne(@User() user): Promise<Student> {
+        return this.studentService.findOne(user.uid.uid);
+    }
+```
+
+5. El Patrón Repository: actúa como un intermediario entre la lógica de negocio y la capa de acceso a datos. Proporciona una colección de objetos y métodos para trabajar con datos, generalmente almacenados en una base de datos, en este caso la interacción con la base de datos usando entidades de TypeORM
+```typescript
+// student.service.ts
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Student } from './entities/student.entity';
+
+@Injectable()
+export class StudentService {
+    constructor(
+        @InjectRepository(Student)
+        private studentRepository: Repository<Student> //USO DEL REPOSITORY
+    ) { }
+
+    async findAll(): Promise<Student[]> {
+        return this.studentRepository.find();
+    }
+
+    async findOne(uid: string): Promise<Student> {
+        const student = await this.studentRepository.findOne({ where: { uid } });
+        if (!student) {
+            throw new ConflictException('Este estudiante no existe');
+        }
+        return student;
+    }
+}
+```
+
+
+   
    

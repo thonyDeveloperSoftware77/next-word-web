@@ -70,9 +70,23 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
    CORREO:prueba1.1.1@gmail.com
    CONTRASEÑA: 12345678
 
-   # Principios Solid Aplicados
 
-Principio de Responsabilidad Única (SRP)
+
+# Principios Solid Aplicados
+
+1. Principio de Responsabilidad Única (SRP)
+- NestJS fomenta el uso de módulos, controladores, servicios y otros componentes para separar las preocupaciones de la aplicación. Cada componente tiene una responsabilidad específica.
+
+- Ejemplo:
+
+    - Controladores: Manejan las solicitudes HTTP.
+    - Servicios: Contienen la lógica de negocio.
+    - Módulos: Agrupan controladores y servicios relacionados.
+
+
+2. Principio de Inversión de Dependencias (Dependency Inversion Principle - DIP): 
+- Uso de inyección de dependencias para desacoplar las clases y mejorar la testabilidad
+
 
 # Patrones de Diseño
 # Principios Solid Aplicados
@@ -134,7 +148,9 @@ export class FirebaseRepository {
 ```
 
 3. Patrón Modular: Organiza la aplicación en módulos reutilizables y bien encapsulados.
-   ![image](https://github.com/user-attachments/assets/5f6ec9e1-8612-4053-bd6d-b07bd3d78850)
+
+   
+   - ![image](https://github.com/user-attachments/assets/5f6ec9e1-8612-4053-bd6d-b07bd3d78850)
 
 
 ## 4. Patrón Decorator
